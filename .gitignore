@@ -1,6 +1,7 @@
 *.pyc
 .git
 .env
+settings.py
 
 node_modules/
 npm-debug.log
