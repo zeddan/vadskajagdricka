@@ -1,0 +1,37 @@
+{
+  "joy": {
+    "VERY_UNLIKELY": 0.2,
+    "UNLIKELY": 0.4,
+    "POSSIBLE": 0.6,
+    "LIKELY": 0.8,
+    "VERY_LIKELY": 1
+  },
+  "surprise": {
+    "VERY_UNLIKELY": 0.16,
+    "UNLIKELY": 0.32,
+    "POSSIBLE": 0.48,
+    "LIKELY": 0.64,
+    "VERY_LIKELY": 0.8
+  },
+  "headwear": {
+    "VERY_UNLIKELY": 0.12,
+    "UNLIKELY": 0.24,
+    "POSSIBLE": 0.36,
+    "LIKELY": 0.48,
+    "VERY_LIKELY": 0.6
+  },
+  "sorrow": {
+    "VERY_UNLIKELY": 0.08,
+    "UNLIKELY": 0.16,
+    "POSSIBLE": 0.24,
+    "LIKELY": 0.32,
+    "VERY_LIKELY": 0.4
+  },
+  "anger": {
+    "VERY_UNLIKELY": 0.04,
+    "UNLIKELY": 0.08,
+    "POSSIBLE": 0.12,
+    "LIKELY": 0.16,
+    "VERY_LIKELY": 0.2
+  }
+}
