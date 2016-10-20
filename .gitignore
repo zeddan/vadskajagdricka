@@ -2,6 +2,7 @@
 .git
 .env
 settings.py
+errors.log
 
 node_modules/
 npm-debug.log

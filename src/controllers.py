@@ -24,6 +24,8 @@ def picture():
         imagedata = vision.analyse(request.json['image'])
         return Response(imagedata, status=200, mimetype='application/json')
     else:
+        app.logger.error('Problem with data, request body looked like this (%s)', request.data)
+        app.logger.info('Error')
         return Response("payload needs to be in JSON-format", status=400)
 
 
