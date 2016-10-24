@@ -52,54 +52,41 @@
         
             $http.post('http://localhost:5000/api/picture', {"image": b64})
             .then(function(res) {
-                console.log(res); 
-        
-                parseService.parse(res);
-                parseService.setImage(img);
-
-                var jsonb64 = btoa(JSON.stringify(res.data));
-        
-                $http.get('http://localhost:5000/api/beverages?' + jsonb64)
-                .then(function(res) {
-                    console.log(res); 
-                    parseService.setBeverages(res);
-                }, function(err) {
-                    console.log(err); 
-                });
-        
+                parseService.setImageResponse(res);
+                $location.path("/picture");
             }, function(err) {
-                console.log("error"); 
-                console.log(err); 
+                console.log("error fetching imageResponse: ", err);
             });
-
-            $location.path("/picture");
 
         };
     }]);
 
     app.controller('PictureController', [
     '$scope',
+    '$http',
     'parseService',
-    function($scope, parseService) {
-        // $scope.labels = parseService.imageResponse.labels;
-        $scope.imageResponse = parseService.imageResponse; 
-        $scope.labels = ['Clothing Hat'];
+    function($scope, $http, parseService) {
+
+        // convert image response to a b64 json string
+        var jsonb64 = btoa(JSON.stringify(parseService.imageResponse));
+
+        // fetch beverage
+        $http.get('http://localhost:5000/api/beverages?' + jsonb64)
+        .then(function(res) {
+            $scope.beverage = res.data[0];
+        }, function(err) {
+            console.log("error fetching beverage: ", err);
+        });
+        
+        // "nice XX you got there"
+        $scope.labels = parseService.imageResponse.labels;
+
+        // render image
         var canvas = document.getElementById('result_canvas');
-        var img = parseService.getImage();;
+        var img = parseService.image;;
         var context = canvas.getContext("2d");
         context.scale(0.45, 0.45);
         context.drawImage(img, 0, 0);
-
-        // $scope.beverages = parseService.getBeverages();
-
-        $scope.name  = "Adelsö";
-        $scope.name2 = "Rocket Indian Pale Ale";
-        $scope.price = "27:80 SEK";
-        $scope.alcohol = "4%";
-        $scope.volume  = "330 ml";
-        
-
-
 
     }]);
 

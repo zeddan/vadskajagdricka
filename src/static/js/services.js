@@ -6,9 +6,12 @@
 
     app.service('parseService', [function() {
 
-        this.parse = function(res) {
+        this.setImageResponse = function(res) {
             this.imageResponse = res.data;
-            console.log(this.imageResponse);
+        };
+
+        this.getImageResponse = function() {
+            return this.imageResponse;
         };
 
         this.setImage = function(image) {
@@ -17,14 +20,6 @@
 
         this.getImage = function() {
             return this.image;
-        };
-
-        this.setBeverages = function(beverages) {
-            this.beverages = beverages;
-        };
-
-        this.getBeverages = function() {
-            return this.beverages;
         };
 
     }]);
