@@ -3,8 +3,6 @@ import json
 import base64
 from flask import render_template, send_from_directory, make_response, request, Response
 from src import app, vision, systembolaget
-categories = json.loads(app.config.get('CATEGORIES'))
-
 
 # routing for basic pages (pass routing onto the Angular app)
 @app.route('/')
@@ -22,11 +20,7 @@ def api():
 @app.route('/api/picture', methods=["POST"])
 def picture():
     if request.method == 'POST' and request.is_json:
-        imagedata = vision.analyse(request.json['image'])
-        if 'persons' not in imagedata:
-            status = 422
-        else:
-            status = 200
+        imagedata, status = vision.analyse(request.json['image'])
         return Response(imagedata, status=status, mimetype='application/json')
     else:
         app.logger.error('Problem with data, request body looked like this (%s)', request.data)
@@ -39,7 +33,7 @@ def beverages():
     if request.method == 'GET':
         # decodes the query param back into a JSON object
         imagedata = json.loads(decode_base64(request.query_string).decode('utf-8'))
-        beveragedata = systembolaget.get_beverage(imagedata, categories[5])
+        beveragedata = systembolaget.get_beverage(imagedata)
         return Response(beveragedata, status=200, mimetype="application/json")
     else:
         return Response("Query must be base64encoded JSON-object", status=400)
