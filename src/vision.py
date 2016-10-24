@@ -19,7 +19,7 @@ def analyse(byte_string_image):
                "features": [
                 {
                  "type": "FACE_DETECTION",
-                 "maxResults": 1
+                 "maxResults": 3
                 },
                 {
                  "type": "LABEL_DETECTION",
@@ -39,7 +39,6 @@ def analyse(byte_string_image):
               }
              ]
             }
-
     response = requests.post(url+key, json=imageRequest)
     result = filter(response.json())
     return json.dumps(result)
@@ -47,31 +46,33 @@ def analyse(byte_string_image):
 
 # takes a response as input parameter returns new dictionary
 def filter(response):
+    new_dict = {}
     res = response['responses'][0]
-    if res['faceAnnotations'] is None:
-        return "ERROR ERROR"
+    if 'faceAnnotations' not in res:
+        new_dict['message'] = """We couldn't find your face but thanks
+                               for a picture of the lovley""" + res['labelAnnotations'][0]['description']
+        return new_dict
     else:
-        new_dict = {}
-        face = res['faceAnnotations'][0]
         emotions = {}
-        labels = []
+        persons = []
         colors = []
-
-        emotions['joy'] = face['joyLikelihood']
-        emotions['surprise'] = face['surpriseLikelihood']
-        emotions['headwear'] = face['headwearLikelihood']
-        emotions['sorrow'] = face['sorrowLikelihood']
-        emotions['anger'] = face['angerLikelihood']
-        new_dict['emotionScore'] = calculate_score(emotions, face['detectionConfidence'])
+        faces = res['faceAnnotations']
+        for face in faces:
+            emotions['joy'] = face['joyLikelihood']
+            emotions['surprise'] = face['surpriseLikelihood']
+            emotions['headwear'] = face['headwearLikelihood']
+            emotions['sorrow'] = face['sorrowLikelihood']
+            emotions['anger'] = face['angerLikelihood']
+            emotions['emotionScore'] = calculate_score(emotions, face['detectionConfidence'])
+            persons.append(emotions)
+        new_dict['persons'] = persons
 
         for color in res['imagePropertiesAnnotation']['dominantColors']['colors']:
             colors.append(color['color'])
-        new_dict['colors'] = colors
         new_dict['brightness'] = calculate_brightness(colors)
-
-        for label in res['labelAnnotations']:
-            labels.append(label['description'])
-        new_dict['labels'] = labels
+        
+        message = res['labelAnnotations'][0]['description']
+        new_dict['message'] = message
         if res['safeSearchAnnotation']['adult'] == "VERY_UNLIKELY":
             new_dict['ecological'] = "false"
         else:
