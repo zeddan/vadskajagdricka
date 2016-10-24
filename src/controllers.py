@@ -23,7 +23,11 @@ def api():
 def picture():
     if request.method == 'POST' and request.is_json:
         imagedata = vision.analyse(request.json['image'])
-        return Response(imagedata, status=200, mimetype='application/json')
+        if 'persons' not in imagedata:
+            status = 422
+        else:
+            status = 200
+        return Response(imagedata, status=status, mimetype='application/json')
     else:
         app.logger.error('Problem with data, request body looked like this (%s)', request.data)
         app.logger.info('Error')

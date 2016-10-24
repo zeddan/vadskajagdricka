@@ -1,7 +1,7 @@
 *.pyc
 .git
 .env
-settings.py
+src/settings.py
 errors.log
 
 node_modules/
