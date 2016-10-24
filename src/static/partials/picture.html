@@ -12,15 +12,15 @@
         <table id="beverage_tag_table">
             <tr>
                 <td class="beverage_tag">price</td>
-                <td>{{ beverage.price }}</td>
+                <td>{{ beverage.price | price }}</td>
             </tr>
             <tr>
                 <td class="beverage_tag">alcohol</td>
-                <td>{{ beverage.alcohol }}</td>
+                <td>{{ beverage.alcohol | alcohol }}</td>
             </tr>
             <tr>
                 <td class="beverage_tag">volume</td>
-                <td>{{ beverage.volume }}</td>
+                <td>{{ beverage.volume | volume }}</td>
             </tr>
         </table>
         

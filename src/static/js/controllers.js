@@ -74,6 +74,7 @@
         $http.get('http://localhost:5000/api/beverages?' + jsonb64)
         .then(function(res) {
             $scope.beverage = res.data[0];
+            console.log("beverage: ", $scope.beverage);
         }, function(err) {
             console.log("error fetching beverage: ", err);
         });

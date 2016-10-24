@@ -4,7 +4,8 @@
     var app = angular.module('vadskajagdricka', [
         'ngRoute',
         'controllers',
-        'services'
+        'services',
+        'filters'
     ])
 
     app.config(['$routeProvider', '$locationProvider',
