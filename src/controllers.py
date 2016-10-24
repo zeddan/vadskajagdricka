@@ -8,6 +8,7 @@ categories = json.loads(app.config.get('CATEGORIES'))
 
 # routing for basic pages (pass routing onto the Angular app)
 @app.route('/')
+@app.route('/picture')
 @app.route('/about')
 def basic_pages():
     return make_response(open('src/templates/index.html').read())

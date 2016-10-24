@@ -1,8 +1,18 @@
-<video id="video" width="640" height="480" autoplay></video>
-<button id="snap">Snap Photo</button>
-<canvas id="canvas" width="640" height="480"></canvas>
+<div id="video_section" ng-show="cameraAccess">
+    <video id="video" width="500" height="500" autoplay></video>
+    <button class="button" id="snap" ng-click="snap()">
+        <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
+    </button>
+    <canvas id="canvas" width="500" height="500"></canvas>
+</div>
 
-<script 
-    src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"></script>
+<div class="row" ng-show="!cameraAccess">
+    <div id="req_txt">
+        <h1>Hi!</h1>
+        <p>In order for this service to work, we need permission to use your webcam</p>
+    </div>
+
+    <div class="row" style="text-align: center;">
+        <button class="button" id="req_btn" ng-click="requestCamera()">ALLOW</button>
+    </div>
+</div>

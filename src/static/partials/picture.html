@@ -1,0 +1,28 @@
+<div class="row" id="result">
+    <div class="col-md-6" id="label_section">
+        <p id="label_txt">Nice {{ labels[0] }} you got there!</p>
+        <canvas class="img-circle" id="result_canvas" width="200" height="200"></canvas>
+        <!--<p>{{ beverages }}</p>-->
+    </div>
+
+    <div class="col-md-6" id="beverage_section">
+        <h1>We would therefore like to recommend to you:</h1>
+        <h2>{{ name }}</h2>
+        <h3>{{ name2 }}</h3>
+        <table id="beverage_tag_table">
+            <tr>
+                <td class="beverage_tag">price</td>
+                <td>{{ price }}</td>
+            </tr>
+            <tr>
+                <td class="beverage_tag">alcohol</td>
+                <td>{{ alcohol }}</td>
+            </tr>
+            <tr>
+                <td class="beverage_tag">volume</td>
+                <td>{{ volume }}</td>
+            </tr>
+        </table>
+        
+    </div>
+</div>

@@ -1,20 +1,31 @@
-'use strict';
+(function() {
+    'use strict';
 
-angular.module('vadskajagdricka', [])
-	.config(['$routeProvider', '$locationProvider',
-		function($routeProvider, $locationProvider) {
+    var app = angular.module('vadskajagdricka', [
+        'ngRoute',
+        'controllers',
+        'services'
+    ])
+
+    app.config(['$routeProvider', '$locationProvider',
+        function($routeProvider, $locationProvider) {
             $routeProvider
             .when('/', {
                 templateUrl: 'static/partials/landing.html',
-                controller: IndexController
+                controller: 'IndexController'
+            })
+            .when('/picture', {
+                templateUrl: 'static/partials/picture.html',
+                controller: 'PictureController'
             })
             .when('/about', {
                 templateUrl: 'static/partials/about.html',
-                controller: AboutController
+                controller: 'AboutController'
             })
             .otherwise({
                 redirectTo: '/'
             });
 
             $locationProvider.html5Mode(true);
-	}]);
+    }]);
+})();
