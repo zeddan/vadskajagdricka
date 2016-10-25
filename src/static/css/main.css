@@ -58,10 +58,19 @@ body {
 
 #video_section {
     text-align: center;
+    padding-top: 5em;
 }
 
 #video_section button {
     font-size: 1.5em;
+}
+
+#video_section #err_msg {
+    transition: all 5s linear;
+    padding: 1em 0;
+    text-align: center;
+    letter-spacing: 0.04em;
+    font-family: 'Montserrat', sans-serif;
 }
 
 #video_section canvas {

@@ -41,6 +41,7 @@
             var context = canvas.getContext('2d');
             var video = document.getElementById('video');
         
+            // take a snapshot of the video
             context.drawImage(video, 0, 0, 640, 480);
         
             var img = canvas.toDataURL();
@@ -55,6 +56,11 @@
                 parseService.setImageResponse(res);
                 $location.path("/picture");
             }, function(err) {
+                if (err.status == 422) {
+                    $scope.errorMessage = "We couldn't identify any face in " +
+                                          "your picture, please try again."
+                }
+
                 console.log("error fetching imageResponse: ", err);
             });
 
