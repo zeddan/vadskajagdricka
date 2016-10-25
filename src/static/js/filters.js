@@ -12,7 +12,7 @@
 
     app.filter('alcohol', function() {
         return function(alcohol) {
-            return alcohol * 100 + " %";
+            return Math.round(alcohol * 100) + " %";
         };
     });
 
