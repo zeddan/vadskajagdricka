@@ -11,8 +11,8 @@ categories       = json.loads(app.config.get('CATEGORIES'))
 categories_times = json.loads(app.config.get('CATEGORIES_TIMES'))
 
 url     = "https://karlroos-systemet.p.mashape.com/product"
-headers = {"X-Mashape-Key": key, "Accept": "application/json"}
 key     = app.config.get('SYSTEMET_KEY')
+headers = {"X-Mashape-Key": key, "Accept": "application/json"}
 
 
 
