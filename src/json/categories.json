@@ -1,5 +1,5 @@
-[
-  {
+{
+  "1": {
     "id": "1",
     "name": "beer",
     "tag": "6,7,8,19,28",
@@ -10,7 +10,7 @@
     "price_from": "7.8",
     "price_to": "25"
   },
-  {
+  "2": {
     "id": "2",
     "name": "cider",
     "tag": "16",
@@ -21,7 +21,7 @@
     "price_from": "8.9",
     "price_to": "19"
   },
-  {
+  "3": {
     "id": "3",
     "name": "red-wine",
     "tag": "23",
@@ -32,7 +32,7 @@
     "price_from": "58",
     "price_to": "400"
   },
-  {
+  "4": {
     "id": "4",
     "name": "white-wine",
     "tag": "25",
@@ -43,7 +43,7 @@
     "price_from": "55",
     "price_to": "400"
   },
-  {
+  "5": {
     "id": "5",
     "name": "rose-wine",
     "tag": "22",
@@ -54,7 +54,7 @@
     "price_from": "34",
     "price_to": "300"
   },
-  {
+  "6": {
     "id": "6",
     "name": "whiskey",
     "tag": "3,4,18",
@@ -65,7 +65,7 @@
     "price_from": "249",
     "price_to": "500"
   },
-  {
+  "7": {
     "id": "7",
     "name": "liqour",
     "tag": "2,15,31,33,34,35",
@@ -76,7 +76,7 @@
     "price_from": "50",
     "price_to": "300"
   },
-  {
+  "8": {
     "id": "8",
     "name": "strong liqour",
     "tag": "2,5,9,10,11,12,13,14,29",
@@ -87,7 +87,7 @@
     "price_from": "100",
     "price_to": "500"
   },
-  {
+  "9": {
     "id": "9",
     "name": "strong beverage",
     "tag": "6,7,8,16,32",
@@ -98,7 +98,7 @@
     "price_from": "25",
     "price_to": "300"
   },
-  {
+  "10": {
     "id": "10",
     "name": "x-mas",
     "tag": "30",
@@ -109,4 +109,4 @@
     "price_from": "34",
     "price_to": "500"
   }
-]
+}

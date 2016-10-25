@@ -4,6 +4,7 @@ import base64
 from flask import render_template, send_from_directory, make_response, request, Response
 from src import app, vision, systembolaget
 
+
 # routing for basic pages (pass routing onto the Angular app)
 @app.route('/')
 @app.route('/picture')
@@ -33,8 +34,8 @@ def beverages():
     if request.method == 'GET':
         # decodes the query param back into a JSON object
         imagedata = json.loads(decode_base64(request.query_string).decode('utf-8'))
-        beveragedata = systembolaget.get_beverage(imagedata)
-        return Response(beveragedata, status=200, mimetype="application/json")
+        beveragedata, status = systembolaget.get_beverage(imagedata)
+        return Response(beveragedata, status=status, mimetype="application/json")
     else:
         return Response("Query must be base64encoded JSON-object", status=400)
 
