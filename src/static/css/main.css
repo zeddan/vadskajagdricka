@@ -1,154 +1,125 @@
 @font-face {
-    font-family: Avenir;
-    src: url('../fonts/AvenirNextLTPro-Regular.otf');
-} 
-
+  font-family: Avenir;
+  src: url("../fonts/AvenirNextLTPro-Regular.otf"); }
 body {
-    line-height: normal;
-}
+  line-height: normal; }
 
 #content {
-    height: 100%
-}
+  height: 100%; }
 
 #frame {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: 2em;
-    background: #ffe9bc;
-}
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 2em;
+  background: #ffe9bc; }
 
 .button {
-    font-weight: 600;
-    background: transparent;
-    padding: 1.4em 3.5em;
-    letter-spacing: 0.25em;
-}
+  font-weight: 600;
+  background: transparent;
+  padding: 1.4em 3.5em;
+  letter-spacing: 0.25em; }
 
 #req_btn {
-    border: 5px solid #ff6347;
-    color: #ff6347;
-}
-
-#req_btn:hover {
+  border: 5px solid #ff6347;
+  color: #ff6347; }
+  #req_btn:hover {
     transition: all 0.5s ease;
     background: #ff6347;
-    color: #fafafa;
-}
+    color: #fafafa; }
 
 #req_txt {
-    text-align: center;
-    letter-spacing: 0.04em;
-    font-family: 'Montserrat', sans-serif;
-}
-
-#req_txt > p {
+  text-align: center;
+  letter-spacing: 0.04em;
+  font-family: 'Montserrat', sans-serif; }
+  #req_txt > p {
     font-size: 2em;
     color: #b019f1;
-    margin: 2em 0;
-}
-
-#req_txt > h1 {
+    margin: 2em 0; }
+  #req_txt > h1 {
     margin-top: 3.5em;
-    color: #004e4e;
-}
+    color: #004e4e; }
+
+#water_txt {
+  text-align: center;
+  letter-spacing: 0.04em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2em;
+  color: #b019f1;
+  margin-top: 5em; }
+  #water_txt img {
+    display: block;
+    margin: 2em auto; }
 
 #video_section {
-    text-align: center;
-    padding-top: 5em;
-}
-
-#video_section button {
-    font-size: 1.5em;
-}
-
-#video_section #err_msg {
-    transition: all 5s linear;
+  text-align: center;
+  padding-top: 5em; }
+  #video_section button {
+    font-size: 1.5em; }
+  #video_section #err_msg {
     padding: 1em 0;
     text-align: center;
     letter-spacing: 0.04em;
-    font-family: 'Montserrat', sans-serif;
-}
-
-#video_section canvas {
-    display: none;
-}
+    font-family: 'Montserrat', sans-serif; }
+  #video_section canvas {
+    display: none; }
 
 #snap {
-    display: block;
-    border: none;
-    width: 500px;
-    background: #004e4e;
-    color: #fafafa;
-    margin: 0 auto;
-}
-
-#snap:hover {
+  display: block;
+  border: none;
+  width: 500px;
+  background: #004e4e;
+  color: #fafafa;
+  margin: 0 auto; }
+  #snap:hover {
     transition: all 0.5s ease;
     background: #ff6347;
-    color: #fafafa;
-}
+    color: #fafafa; }
 
 #result {
-    margin: 0;
-    height: 100%;
-}
+  margin: 0;
+  height: 100%; }
 
 #label_section {
-    text-align: center;
-    padding: 8em;
-    height: 100%;
-}
+  text-align: center;
+  padding: 8em;
+  height: 100%; }
 
 #label_txt {
-    text-align: center;
-    color: #004e4e;
-    font-size: 2em;
-    margin-bottom: 1em;
-    font-family: 'Montserrat', sans-serif;
-}
+  text-align: center;
+  color: #004e4e;
+  font-size: 2em;
+  margin-bottom: 1em;
+  font-family: 'Montserrat', sans-serif; }
 
 #beverage_section {
-    background: #fcee77;
-    padding: 8em;
-    height: 100%;
-}
-
-#beverage_section h1 {
+  background: #fcee77;
+  padding: 8em;
+  height: 100%; }
+  #beverage_section h1 {
     font-family: 'Raleway', sans-serif;
-    margin: 0;
-}
-
-#beverage_section h2 {
+    margin: 0; }
+  #beverage_section h2 {
     font-family: 'Abril Fatface', cursive;
     text-align: center;
     margin-top: 2em;
-    margin-bottom: 0;
-}
-
-#beverage_section h3 {
+    margin-bottom: 0; }
+  #beverage_section h3 {
     font-family: 'Avenir', sans-serif;
     text-align: center;
     margin-top: 0;
-    margin-bottom: 2em;
-}
-
-#beverage_section #beverage_tag_table {
+    margin-bottom: 2em; }
+  #beverage_section #beverage_tag_table {
     margin: 0 auto;
-    font-size: 1.5em;
-}
-
-#beverage_section .beverage_tag {
+    font-size: 1.5em; }
+  #beverage_section .beverage_tag {
     text-align: right;
     padding: 0 1em;
     color: #be3f07;
     color: #e64d26;
     font-family: 'Raleway', sans-serif;
-    font-weight: bold;
-}
+    font-weight: bold; }
 
-#result_canvas {
-}
+/*# sourceMappingURL=main.css.map */

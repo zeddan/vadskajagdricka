@@ -7,7 +7,8 @@ from src import app, vision, systembolaget
 
 # routing for basic pages (pass routing onto the Angular app)
 @app.route('/')
-@app.route('/picture')
+@app.route('/result')
+@app.route('/result/water')
 @app.route('/about')
 @app.route('/api')
 def basic_pages():
@@ -47,10 +48,3 @@ def beverages():
 @app.errorhandler(404)
 def page_not_found():
     return render_template('404.html'), 404
-
-
-def decode_base64(data):
-    missing_padding = 4 - len(data) % 4
-    if missing_padding:
-        data += b'=' * missing_padding
-    return base64.b64decode(data)

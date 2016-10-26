@@ -12,12 +12,16 @@
         function($routeProvider, $locationProvider) {
             $routeProvider
             .when('/', {
-                templateUrl: 'static/partials/landing.html',
+                templateUrl: 'static/partials/home.html',
                 controller: 'IndexController'
             })
-            .when('/picture', {
-                templateUrl: 'static/partials/picture.html',
-                controller: 'PictureController'
+            .when('/result', {
+                templateUrl: 'static/partials/result.html',
+                controller: 'ResultController'
+            })
+            .when('/result/water', {
+                templateUrl: 'static/partials/water.html',
+                controller: 'WaterController'
             })
             .when('/about', {
                 templateUrl: 'static/partials/about.html',
