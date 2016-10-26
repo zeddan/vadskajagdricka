@@ -1,4 +1,4 @@
-# vision.py handels communications with the Google Vision API
+"""vision.py handels communications with the Google Vision API"""
 import requests
 import json
 from src import app
@@ -6,11 +6,20 @@ from src import app
 url = 'https://vision.googleapis.com/v1/images:annotate?fields=responses&key='
 key = app.config.get('VISION_KEY')
 emotion_matrix = json.loads(app.config.get('EMOTION_MATRIX'))
+emotion_value = {'VERY_UNLIKELY': 1, 'UNLIKELY': 2, 'POSSIBLE': 3, 'LIKELY': 4, 'VERY_LIKELY': 5}
 
 
-# takes a base64encode string represting an image
-# returns filterd response from google vision API
 def analyse(byte_string_image):
+    """
+    Takes a string as input. This should be a base64encoded representation of
+    an image.
+
+    Keyword Arguments:
+    byte_string_image -- string
+
+    Returns a filterd response from google vision API as a JSON-object.
+    """
+
     imageRequest = {
         "requests": [
             {
@@ -40,16 +49,26 @@ def analyse(byte_string_image):
               }
              ]
             }
+
     response = requests.post(url+key, json=imageRequest).json()
+
     if 'faceAnnotations' not in response['responses'][0]:
             return {}, 422
     else:
-        result = filter(response)
+        result = _filter(response)
         return json.dumps(result), 200
 
 
-# takes a response as input parameter returns new dictionary
-def filter(response):
+def _filter(response):
+    """
+    Filters a response from the Vision API and returns a new dictionary with
+    emotionScore, brightness, labels and ecological values.
+
+    Keyword Arguments:
+    response -- dictionary
+
+    Returns a new dictionary.
+    """
     new_dict = {}
     res = response['responses'][0]
     emotions = {}
@@ -61,11 +80,11 @@ def filter(response):
     emotions['headwear'] = face['headwearLikelihood']
     emotions['sorrow'] = face['sorrowLikelihood']
     emotions['anger'] = face['angerLikelihood']
-    new_dict['emotionScore'] = calculate_score(emotions, face['detectionConfidence'])
+    new_dict['emotionScore'] = _calculate_score(emotions, face['detectionConfidence'])
 
     for color in res['imagePropertiesAnnotation']['dominantColors']['colors']:
         colors.append(color['color'])
-        new_dict['brightness'] = calculate_brightness(colors)
+        new_dict['brightness'] = _calculate_brightness(colors)
 
     labels.append(res['labelAnnotations'][0]['description'])
     new_dict['labels'] = labels
@@ -73,21 +92,47 @@ def filter(response):
         new_dict['ecological'] = "false"
     else:
         new_dict['ecological'] = "true"
+    print(new_dict['emotionScore'])
     return new_dict
 
 
-# takes emotions and confidence as input and returns a score between 1 and 100
-def calculate_score(emotions, confidence):
-    oldscore = -1
-    for x in emotions:
-            score = confidence * emotion_matrix[x][emotions[x]]
-            if oldscore < score:
-                oldscore = score
-    return oldscore * 100
+def _calculate_score(emotions, confidence):
+    print(emotions)
+    """
+    Calulates an emotion score amd returns the highest score.
+    Calculation is done by mapping the emotion value to a number between 0.04-1.0
+    and multiplying it with the detectionConfidence.
+
+    Keyword Arguments:
+    emotions -- a list with emotions from the Vision API response.
+    confindce -- detectionConfidence from the Vision API response.
+
+    Returns highest score.
+    """
+    emotion = ""
+    higest_value = -1
+    for k, v in emotions.items():
+        print(k, v)
+        value = emotion_value[v]
+        if value > higest_value:
+            higest_value = value
+            emotion = k
+
+    score = confidence * emotion_matrix[emotion][emotions[emotion]]
+    print(score)
+    return score * 100
 
 
-# takes colors as input and returns the sum
-def calculate_brightness(colors):
+def _calculate_brightness(colors):
+    """
+    Sums all values in the colors list and returns a value between 1-100.
+
+    Keyword Arguments:
+    colors -- a list of all the colors from the Vision API response.
+
+    Returns sum of all colors divided by 1000
+    """
+
     brightness = 0
     for color in colors:
         r = int(color['red'])
