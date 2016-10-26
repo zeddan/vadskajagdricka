@@ -9,13 +9,9 @@ from src import app, vision, systembolaget
 @app.route('/')
 @app.route('/picture')
 @app.route('/about')
+@app.route('/api')
 def basic_pages():
     return make_response(open('src/templates/index.html').read())
-
-
-@app.route('/api')
-def api():
-    return "INFO ABOUT API AS HTML/TEXT"
 
 
 @app.route('/api/picture', methods=["POST"])
