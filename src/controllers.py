@@ -41,8 +41,6 @@ def beverages():
         params = [price, alcohol, eco, hour, month]
         beveragedata, status = systembolaget.get_beverage(params)
         return Response(beveragedata, status=status, mimetype="application/json")
-    else:
-        return Response("Query must be base64encoded JSON-object", status=400)
 
 
 @app.errorhandler(404)
