@@ -32,9 +32,17 @@ def picture():
 @app.route('/api/beverages', methods=['GET'])
 def beverages():
     if request.method == 'GET':
-        # decodes the query param back into a JSON object
-        imagedata = json.loads(decode_base64(request.query_string).decode('utf-8'))
-        beveragedata, status = systembolaget.get_beverage(imagedata)
+        price   = request.args.get('price')
+        alcohol = request.args.get('alcohol')
+        eco     = request.args.get('ecological')
+        hour    = request.args.get('hour')
+        month   = request.args.get('month')
+
+        if not (price and alcohol and eco and hour and month):
+            return Response("Not enough parameters provided", status=400)
+
+        params = [price, alcohol, eco, hour, month]
+        beveragedata, status = systembolaget.get_beverage(params)
         return Response(beveragedata, status=status, mimetype="application/json")
     else:
         return Response("Query must be base64encoded JSON-object", status=400)

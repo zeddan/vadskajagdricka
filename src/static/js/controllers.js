@@ -73,12 +73,21 @@
     'parseService',
     function($scope, $http, parseService) {
 
-        // convert image response to a b64 json string
-        var jsonb64 = btoa(JSON.stringify(parseService.imageResponse));
+        var date  = new Date();
+        var hour  = date.getHours();
+        var month = date.getMonth() + 1;
+         
+        var url = 'http://localhost:5000/api/beverages';
+        var params = {
+            'price': parseService.imageResponse.emotionScore,
+            'alcohol': parseService.imageResponse.brightness,
+            'ecological': parseService.imageResponse.ecological,
+            'hour': hour,
+            'month': month
+        }
 
         // fetch beverage
-        $http.get('http://localhost:5000/api/beverages?' + jsonb64)
-        .then(function(res) {
+        $http.get(url, {'params': params}).then(function(res) {
             $scope.beverage = res.data[0];
             console.log("beverage: ", $scope.beverage);
         }, function(err) {

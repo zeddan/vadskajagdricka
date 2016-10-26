@@ -16,19 +16,19 @@ headers = {"X-Mashape-Key": key, "Accept": "application/json"}
 
 
 
-def get_beverage(imagedata):
-    date = datetime.now()
-    hour = date.hour
-    month = date.month
+def get_beverage(params):
+    price   = float(params[0])
+    alcohol = float(params[1])
+    eco     = str(params[2])
+    hour    = int(params[3])
+    month   = int(params[4])
 
     if 9 <= hour <= 12:
         return {"No drinks are available during 09:00 - 12:00"}, 204
 
     category = get_category(hour, month)
-    payload = map_values(category,
-                         imagedata['emotionScore'],
-                         imagedata['brightness'],
-                         imagedata['ecological'])
+
+    payload = map_values(category, price, alcohol, eco)
     res = requests.get(url, headers=headers, params=payload)
     return res, 200
 
