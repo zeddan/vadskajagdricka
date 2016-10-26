@@ -12,7 +12,7 @@
         function($routeProvider, $locationProvider) {
             $routeProvider
             .when('/', {
-                templateUrl: 'static/partials/landing.html',
+                templateUrl: 'static/partials/home.html',
                 controller: 'IndexController'
             })
             .when('/result', {
