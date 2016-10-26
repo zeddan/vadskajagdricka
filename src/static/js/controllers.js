@@ -41,7 +41,7 @@
             // the bar is closed between 09:00 and 12:00
             var hour = new Date().getHours();
             if (hour >= 9 && hour <= 12) {
-                $location.path("/picture/water");
+                $location.path("/result/water");
             }
             
             // otherwise, proceed as usual
@@ -60,10 +60,10 @@
                 i.src = img;
                 parseService.setImage(i);
             
-                var url = 'http://localhost:5000/api/picture';
+                var url = 'http://localhost:5000/api/result';
                 $http.post(url, {"image": b64}).then(function(res) {
                     parseService.setImageResponse(res);
-                    $location.path("/picture");
+                    $location.path("/result");
                 }, function(err) {
                     if (err.status == 422) {
                         $scope.errorMessage = "We couldn't identify any face in " +
@@ -76,7 +76,7 @@
         };
     }]);
 
-    app.controller('PictureController', [
+    app.controller('ResultController', [
     '$scope',
     '$http',
     'parseService',
