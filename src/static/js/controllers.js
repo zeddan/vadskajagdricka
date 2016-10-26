@@ -60,7 +60,7 @@
                 i.src = img;
                 parseService.setImage(i);
             
-                var url = 'http://localhost:5000/api/result';
+                var url = 'http://localhost:5000/api/picture';
                 $http.post(url, {"image": b64}).then(function(res) {
                     parseService.setImageResponse(res);
                     $location.path("/result");
