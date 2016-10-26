@@ -19,6 +19,10 @@
                 templateUrl: 'static/partials/picture.html',
                 controller: 'PictureController'
             })
+            .when('/picture/water', {
+                templateUrl: 'static/partials/water.html',
+                controller: 'WaterController'
+            })
             .when('/about', {
                 templateUrl: 'static/partials/about.html',
                 controller: 'AboutController'

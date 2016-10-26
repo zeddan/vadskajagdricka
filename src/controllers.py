@@ -8,6 +8,7 @@ from src import app, vision, systembolaget
 # routing for basic pages (pass routing onto the Angular app)
 @app.route('/')
 @app.route('/picture')
+@app.route('/picture/water')
 @app.route('/about')
 def basic_pages():
     return make_response(open('src/templates/index.html').read())
