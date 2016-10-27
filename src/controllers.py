@@ -10,13 +10,9 @@ from src import app, vision, systembolaget
 @app.route('/result')
 @app.route('/result/water')
 @app.route('/about')
+@app.route('/api')
 def basic_pages():
     return make_response(open('src/templates/index.html').read())
-
-
-@app.route('/api')
-def api():
-    return "INFO ABOUT API AS HTML/TEXT"
 
 
 @app.route('/api/picture', methods=["POST"])
@@ -39,14 +35,16 @@ def beverages():
         hour    = request.args.get('hour')
         month   = request.args.get('month')
 
-        if not (price and alcohol and eco and hour and month):
+        if not (price and alcohol and eco):
             return Response("Not enough parameters provided", status=400)
+        if hour is None:
+            hour = "23"
+        if month is None:
+            month = "12"
 
         params = [price, alcohol, eco, hour, month]
         beveragedata, status = systembolaget.get_beverage(params)
         return Response(beveragedata, status=status, mimetype="application/json")
-    else:
-        return Response("Query must be base64encoded JSON-object", status=400)
 
 
 @app.errorhandler(404)
