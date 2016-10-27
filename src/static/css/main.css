@@ -1,3 +1,67 @@
+/*
+    Based on Curtis Andrews's codepen:
+    https://codepen.io/candrews/pen/XdGYpN
+*/
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 94px; }
+
+.dot {
+  position: absolute;
+  top: 41px;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  background: #363636; }
+
+.dot_1 {
+  transform: translateX(-20px);
+  animation: animateDot1 1.5s infinite; }
+
+.dot_2 {
+  transform: translateX(0px);
+  animation: animateDot2 1.5s infinite; }
+
+.dot_3 {
+  transform: translateX(20px);
+  animation: animateDot3 1.5s infinite; }
+
+@keyframes animateDot1 {
+  0% {
+    transform: translateX(-20px); }
+  12.5% {
+    transform: translateX(-35px); }
+  37.5% {
+    transform: translateX(-12px); }
+  62.5% {
+    transform: translateX(-20px); }
+  100% {
+    transform: translateX(-20px); } }
+@keyframes animateDot2 {
+  0% {
+    transform: translateX(-12px); }
+  37% {
+    transform: translateX(0px); }
+  50% {
+    transform: translateX(12px); }
+  88% {
+    transform: translateX(0px); }
+  100% {
+    transform: translateX(-12px); } }
+@keyframes animateDot3 {
+  12.5% {
+    transform: translateX(-15px 20px); }
+  50% {
+    transform: translateX(20px); }
+  62.5% {
+    transform: translateX(35px); }
+  87.5% {
+    transform: translateX(12px); } }
 @font-face {
   font-family: Avenir;
   src: url("../fonts/AvenirNextLTPro-Regular.otf"); }

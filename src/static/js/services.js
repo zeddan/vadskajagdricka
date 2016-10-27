@@ -22,6 +22,16 @@
             return this.image;
         };
 
+        this.setBeverage = function(beverage) {
+            this.beverage = beverage;
+            console.log(beverage);
+        }
+
+        this.getBeverage = function() {
+            return this.beverage;
+            console.log(beverage);
+        }
+
     }]);
 
 })();

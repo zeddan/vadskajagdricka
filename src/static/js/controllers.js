@@ -46,6 +46,8 @@
             
             // otherwise, proceed as usual
             else {
+                $scope.loading = true;
+
                 var canvas = document.getElementById('canvas');
                 var context = canvas.getContext('2d');
                 var video = document.getElementById('video');
@@ -53,27 +55,60 @@
                 // take a snapshot of the video
                 context.drawImage(video, 0, 0, 640, 480);
             
+                // convert image to a b64 string
                 var img = canvas.toDataURL();
                 var b64 = img.split(",")[1];
 
+                // save the image
                 var i = new Image();
                 i.src = img;
                 parseService.setImage(i);
-            
-                var url = 'http://localhost:5000/api/picture';
-                $http.post(url, {"image": b64}).then(function(res) {
-                    parseService.setImageResponse(res);
-                    $location.path("/result");
-                }, function(err) {
-                    if (err.status == 422) {
-                        $scope.errorMessage = "We couldn't identify any face in " +
-                                            "your picture, please try again."
-                    }
-                    console.log("error fetching imageResponse: ", err);
+
+                fetchImageResponse(b64, function(imageResponse) {
+                    parseService.setImageResponse(imageResponse);
+                    fetchBeverage(function(beverage) {
+                        parseService.setBeverage(beverage);
+                        $location.path("/result");
+                    });
                 });
+            
             }
 
         };
+
+        var fetchImageResponse = function(b64, callback) {
+                var url = 'http://localhost:5000/api/picture';
+                $http.post(url, {"image": b64}).then(function(res) {
+                    callback(res);
+                }, function(err) {
+                    if (err.status == 422) {
+                        var msg = "We couldn't identify any face in your " + 
+                                  "picture, please try again."
+                        $scope.errorMessage = msg; 
+                    }
+                });
+        }
+
+        var fetchBeverage = function(callback) {
+            var date  = new Date();
+            var hour  = date.getHours();
+            var month = date.getMonth() + 1;
+            
+            var url = 'http://localhost:5000/api/beverages';
+            var params = {
+                'price': parseService.imageResponse.emotionScore,
+                'alcohol': parseService.imageResponse.brightness,
+                'ecological': parseService.imageResponse.ecological,
+                'hour': hour,
+                'month': month
+            }
+
+            $http.get(url, {'params': params}).then(function(res) {
+                callback(res.data[0]);
+            });
+
+        }
+
     }]);
 
     app.controller('ResultController', [
@@ -82,26 +117,7 @@
     'parseService',
     function($scope, $http, parseService) {
 
-        var date  = new Date();
-        var hour  = date.getHours();
-        var month = date.getMonth() + 1;
-         
-        var url = 'http://localhost:5000/api/beverages';
-        var params = {
-            'price': parseService.imageResponse.emotionScore,
-            'alcohol': parseService.imageResponse.brightness,
-            'ecological': parseService.imageResponse.ecological,
-            'hour': hour,
-            'month': month
-        }
-
-        // fetch beverage
-        $http.get(url, {'params': params}).then(function(res) {
-            $scope.beverage = res.data[0];
-            console.log("beverage: ", $scope.beverage);
-        }, function(err) {
-            console.log("error fetching beverage: ", err);
-        });
+        $scope.beverage = parseService.getBeverage();
         
         // "nice XX you got there"
         $scope.labels = parseService.imageResponse.labels;

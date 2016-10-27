@@ -1,19 +1,19 @@
-<div id="video_section" ng-show="cameraAccess">
+<div class="loader" ng-show="loading">
+    <span class="dot dot_1"></span>
+    <span class="dot dot_2"></span>
+    <span class="dot dot_3"></span>
+</div>
+
+<div id="video_section" ng-show="cameraAccess && !loading">
     <video id="video" width="500" height="375" autoplay></video>
     <button class="button" id="snap" ng-click="snap()">
         <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
     </button>
     <canvas id="canvas" width="500" height="500"></canvas>
 
-    <div ng-show="errorMessage"
-         ng-init="errorMessage = undefined"
-         id="err_msg">
-         {{ errorMessage }}
-    </div>
-
 </div>
 
-<div class="row" ng-show="!cameraAccess">
+<div class="row" ng-show="!cameraAccess && !loading">
     <div id="req_txt">
         <h1>Hi!</h1>
         <p>In order for this service to work, we need permission to use your webcam</p>
@@ -23,3 +23,4 @@
         <button class="button" id="req_btn" ng-click="requestCamera()">ALLOW</button>
     </div>
 </div>
+
