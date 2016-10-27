@@ -52,7 +52,7 @@ def analyse(byte_string_image):
 
     response = requests.post(url+key, json=imageRequest).json()
 
-    if 'faceAnnotations' not in response['responses'][0]:
+    if 'faceAnnotations' and 'labelAnnotations' not in response['responses'][0]:
             return {}, 422
     else:
         result = _filter(response)
@@ -84,7 +84,8 @@ def _filter(response):
 
     for color in res['imagePropertiesAnnotation']['dominantColors']['colors']:
         colors.append(color['color'])
-        new_dict['brightness'] = _calculate_brightness(colors)
+    new_dict['brightness'] = _calculate_brightness(colors)
+    print("brightness: " + str(new_dict['brightness']))
 
     labels.append(res['labelAnnotations'][0]['description'])
     new_dict['labels'] = labels
@@ -139,4 +140,5 @@ def _calculate_brightness(colors):
         g = int(color['green'])
         b = int(color['blue'])
         brightness += r + b + g
-    return brightness/1000
+
+    return brightness/100
