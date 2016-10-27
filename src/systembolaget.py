@@ -31,9 +31,6 @@ def get_beverage(params):
     hour    = int(params[3])
     month   = int(params[4])
 
-    if 9 <= hour <= 12:
-        return {"No drinks are available during 09:00 - 12:00"}, 204
-
     category = _get_category(hour, month)
 
     payload = _map_values(category, price, alcohol, eco)
