@@ -55,13 +55,13 @@ def _map_values(category, price, alcohol, ecological):
     """
     new_dict = {}
     new_dict['tag'] = category['tag']
-    new_dict['alcohol_from'] = interp(alcohol, [1, 100],
-                                      [category['alcohol_from'],
-                                      category['alcohol_to']])
+    new_dict['alcohol_from'] = ('% 6.2f' % interp(alcohol, [1, 100],
+                                                  [category['alcohol_from'],
+                                                  category['alcohol_to']]))
     new_dict['alcohol_to'] = category['alcohol_to']
-    new_dict['price_from'] = interp(price, [1, 100],
-                                    [category['price_from'],
-                                     category['price_to']])
+    new_dict['price_from'] = ('% 6.2f' % interp(price, [1, 100],
+                                                [category['price_from'],
+                                                category['price_to']]))
     new_dict['price_to'] = category['price_to']
     new_dict['ecological'] = ecological
     new_dict['order'] = 'ASC'
