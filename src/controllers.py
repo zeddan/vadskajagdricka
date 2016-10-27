@@ -35,8 +35,12 @@ def beverages():
         hour    = request.args.get('hour')
         month   = request.args.get('month')
 
-        if not (price and alcohol and eco and hour and month):
+        if not (price and alcohol and eco):
             return Response("Not enough parameters provided", status=400)
+        if hour is None:
+            hour = "23"
+        if month is None:
+            month = "12"
 
         params = [price, alcohol, eco, hour, month]
         beveragedata, status = systembolaget.get_beverage(params)
