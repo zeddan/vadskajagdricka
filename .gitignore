@@ -4,6 +4,7 @@
 src/settings.py
 errors.log
 **.sass-cache**
+*.map
 
 node_modules/
 npm-debug.log
