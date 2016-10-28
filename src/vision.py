@@ -39,10 +39,6 @@ def analyse(byte_string_image):
                 {
                  "type": "IMAGE_PROPERTIES",
                  "maxResults": 1
-                },
-                {
-                 "type": "SAFE_SEARCH_DETECTION",
-                 "maxResults": 1
                 }
                ],
                "imageContext": {
@@ -91,10 +87,6 @@ def _filter(response):
     labels.append(res['labelAnnotations'][0]['description'])
     labels.append(res['labelAnnotations'][1]['description'])
     new_dict['labels'] = labels
-    if res['safeSearchAnnotation']['adult'] == "VERY_UNLIKELY":
-        new_dict['ecological'] = "false"
-    else:
-        new_dict['ecological'] = "true"
 
     print(new_dict['emotionScore'])
     print(new_dict['labels'])
