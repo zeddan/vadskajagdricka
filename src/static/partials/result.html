@@ -1,32 +1,36 @@
 <div class="row" id="result">
     <div class="col-md-6" id="label_section">
-        <p id="label_txt">Nice {{ labels[0] | lowercase }} {{ labels[1] | lowercase }} you got there!</p>
-        <canvas class="img-circle" id="result_canvas" width="200" height="200"></canvas>
+        <div id="label_container">
+            <p id="label_txt">Nice {{ labels[0] | lowercase }} {{ labels[1] | lowercase }} you got there!</p>
+            <canvas class="img-circle" id="result_canvas" width="200" height="200"></canvas>
+        </div>
     </div>
 
     <div ng-show="beverage" class="col-md-6" id="beverage_section">
 
-        <h1>We would therefore like to recommend to you:</h1>
-        <h2>{{ beverage.name }}</h2>
-        <h3>{{ beverage.name_2 }}</h3>
-        <table id="beverage_tag_table">
-            <tr>
-                <td class="beverage_tag">price</td>
-                <td>{{ beverage.price | price }}</td>
-            </tr>
-            <tr>
-                <td class="beverage_tag">alcohol</td>
-                <td>{{ beverage.alcohol | alcohol }}</td>
-            </tr>
-            <tr>
-                <td class="beverage_tag">apk</td>
-                <td>{{ beverage.apk }}</td>
-            </tr>
-            <tr>
-                <td class="beverage_tag">volume</td>
-                <td>{{ beverage.volume | volume }}</td>
-            </tr>
-        </table>
+        <div id="beverage_container">
+            <h1>We would therefore like to recommend to you:</h1>
+            <h2>{{ beverage.name }}</h2>
+            <h3>{{ beverage.name_2 }}</h3>
+            <table id="beverage_tag_table">
+                <tr>
+                    <td class="beverage_tag">price</td>
+                    <td>{{ beverage.price | price }}</td>
+                </tr>
+                <tr>
+                    <td class="beverage_tag">alcohol</td>
+                    <td>{{ beverage.alcohol | alcohol }}</td>
+                </tr>
+                <tr>
+                    <td class="beverage_tag">apk</td>
+                    <td>{{ beverage.apk }}</td>
+                </tr>
+                <tr>
+                    <td class="beverage_tag">volume</td>
+                    <td>{{ beverage.volume | volume }}</td>
+                </tr>
+            </table>
+        </div>
 
     </div>
 </div>
