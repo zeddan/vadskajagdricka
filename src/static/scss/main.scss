@@ -3,7 +3,7 @@
 @font-face {
     font-family: Avenir;
     src: url('../fonts/AvenirNextLTPro-Regular.otf');
-} 
+}
 
 body {
     line-height: normal;
@@ -93,7 +93,7 @@ body {
 
 #video_section {
     text-align: center;
-    
+
     video.snapped {
         display: none;
     }
@@ -205,4 +205,18 @@ body {
         font-weight: bold;
     }
 
+}
+
+#api_text {
+    padding: 1em;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    color: #004e4e;
+}
+
+#api_created {
+    padding: 1em;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    color: #000000;
 }
