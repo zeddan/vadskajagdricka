@@ -17,7 +17,7 @@ def basic_pages():
 
 @app.route('/api/picture', methods=["POST"])
 def picture():
-    if request.method == 'POST' and request.is_json:
+    if request.method == 'POST':
         imagedata, status = vision.analyse(request.json['image'])
         return Response(imagedata, status=status, mimetype='application/json')
     else:

@@ -78,9 +78,28 @@ body {
 #video_section {
     text-align: center;
     padding-top: 5em;
+    
+    video.snapped {
+        display: none;
+    }
+
+    canvas {
+        display: none;
+        background: red;
+
+        &.snapped {
+            display: inline-block;
+        }
+
+    }
 
     button {
         font-size: 1.5em;
+
+        &.snapped{
+            background: rgba(0, 78, 78, 0.17);
+            opacity: 1;
+        }
     }
 
     #err_msg {
@@ -88,10 +107,6 @@ body {
         text-align: center;
         letter-spacing: 0.04em;
         font-family: 'Montserrat', sans-serif;
-    }
-
-    canvas {
-        display: none;
     }
 
 }
