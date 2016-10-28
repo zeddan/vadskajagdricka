@@ -27,6 +27,9 @@
                 templateUrl: 'static/partials/about.html',
                 controller: 'AboutController'
             })
+            .when('/api', {
+                templateUrl: 'static/partials/api.html'
+            })
             .otherwise({
                 redirectTo: '/'
             });
