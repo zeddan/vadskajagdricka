@@ -49,7 +49,8 @@ def analyse(byte_string_image):
 
     response = requests.post(url+key, json=imageRequest).json()
 
-    if 'faceAnnotations' and 'labelAnnotations' not in response:
+    r = response['responses'][0]
+    if not {'faceAnnotations', 'labelAnnotations'} <= set(r):
         return {}, 422
     else:
         result = _filter(response)
