@@ -33,7 +33,7 @@ def get_beverage(params):
 
     category = _get_category(hour, month)
 
-    payload = _map_values(category, price, alcohol)
+    payload = _map_values(category, p_score, a_score)
 
     res = requests.get(url, headers=headers, params=payload)
     return res, 200
