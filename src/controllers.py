@@ -31,18 +31,17 @@ def beverages():
     if request.method == 'GET':
         price   = request.args.get('price')
         alcohol = request.args.get('alcohol')
-        eco     = request.args.get('ecological')
         hour    = request.args.get('hour')
         month   = request.args.get('month')
 
-        if not (price and alcohol and eco):
+        if not (price and alcohol):
             return Response("Not enough parameters provided", status=400)
         if hour is None:
             hour = "23"
         if month is None:
             month = "12"
-
-        params = [price, alcohol, eco, hour, month]
+        hour = 9
+        params = [price, alcohol, hour, month]
         beveragedata, status = systembolaget.get_beverage(params)
         return Response(beveragedata, status=status, mimetype="application/json")
 
