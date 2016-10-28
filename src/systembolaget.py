@@ -27,18 +27,17 @@ def get_beverage(params):
     """
     price   = float(params[0])
     alcohol = float(params[1])
-    eco     = str(params[2])
-    hour    = int(params[3])
-    month   = int(params[4])
+    hour    = int(params[2])
+    month   = int(params[3])
 
     category = _get_category(hour, month)
 
-    payload = _map_values(category, price, alcohol, eco)
+    payload = _map_values(category, price, alcohol)
     res = requests.get(url, headers=headers, params=payload)
     return res, 200
 
 
-def _map_values(category, price, alcohol, ecological):
+def _map_values(category, price, alcohol):
     """
     Maps the parameters to values in the category
 
@@ -46,21 +45,19 @@ def _map_values(category, price, alcohol, ecological):
     category -- Category to map other parameters to.
     price -- the value to map to category['price_from']
     alcohol -- the value to map to category['alcohol_from']
-    ecological -- the value set ecological to.
 
     Returns a new dictionary.
     """
     new_dict = {}
     new_dict['tag'] = category['tag']
-    new_dict['alcohol_from'] = ('% 6.2f' % interp(alcohol, [1, 100],
+    new_dict['alcohol_from'] = ('% 1.2f' % interp(alcohol, [1, 100],
                                                   [category['alcohol_from'],
                                                   category['alcohol_to']]))
     new_dict['alcohol_to'] = category['alcohol_to']
-    new_dict['price_from'] = ('% 6.2f' % interp(price, [1, 100],
+    new_dict['price_from'] = ('% 1.2f' % interp(price, [1, 100],
                                                 [category['price_from'],
                                                 category['price_to']]))
     new_dict['price_to'] = category['price_to']
-    new_dict['ecological'] = ecological
     new_dict['order'] = 'ASC'
     new_dict['order_by'] = 'price'
     new_dict["limit"] = 1
