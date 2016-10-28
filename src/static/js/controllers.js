@@ -21,8 +21,8 @@
                 });
             });
         }
-        
-        $scope.requestCamera = function() { 
+
+        $scope.requestCamera = function() {
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
                     var video = document.getElementById('video');
@@ -35,7 +35,7 @@
                 });
             }
         };
-        
+
         $scope.snap = function() {
 
             // we don't want users to hammer the snap button
@@ -46,7 +46,7 @@
             if (hour >= 9 && hour <= 12) {
                 $location.path("/result/water");
             }
-            
+
             // otherwise, proceed as usual
             else {
                 $scope.snapped = true;
@@ -54,10 +54,10 @@
                 var canvas = document.getElementById('canvas');
                 var context = canvas.getContext('2d');
                 var video = document.getElementById('video');
-            
+
                 // take a snapshot of the video
                 context.drawImage(video, 0, 0, 500, 375);
-            
+
                 // convert image to a b64 string
                 var img = canvas.toDataURL();
                 var b64 = img.split(",")[1];
@@ -98,12 +98,13 @@
                 }
 
                 $http(req).then(function(res) {
+                    console.log(res);
                     callback(res);
                 }, function(err) {
                     if (err.status == 422) {
-                        var msg = "We couldn't identify any face in your " + 
+                        var msg = "We couldn't identify any face in your " +
                                   "picture, please try again."
-                        $scope.errorMessage = msg; 
+                        $scope.errorMessage = msg;
                         $scope.snapped = false;
                         $scope.loading = false;
                     }
@@ -114,12 +115,11 @@
             var date  = new Date();
             var hour  = date.getHours();
             var month = date.getMonth() + 1;
-            
+
             var url = 'http://localhost:5000/api/beverages';
             var params = {
-                'price_score': parseService.imageResponse.emotionScore,
-                'alcohol_score': parseService.imageResponse.brightness,
-                'ecological': parseService.imageResponse.ecological,
+                'price_score': parseService.imageResponse.emotion_score,
+                'alcohol_score': parseService.imageResponse.color_score,
                 'hour': hour,
                 'month': month
             }
@@ -139,7 +139,7 @@
     function($scope, $http, parseService) {
 
         $scope.beverage = parseService.getBeverage();
-        
+
         // "nice XX you got there"
         $scope.labels = parseService.imageResponse.labels;
 
@@ -163,7 +163,7 @@
     app.controller('AboutController', [
     '$scope',
     function($scope) {
-    
+
     }]);
 
 
