@@ -60,7 +60,7 @@ def analyse(byte_string_image):
 def _filter(response):
     """
     Filters a response from the Vision API and returns a new dictionary with
-    emotionScore, brightness, labels and ecological values.
+    emotion_score, color_score, labels and ecological values.
 
     Keyword Arguments:
     response -- dictionary
@@ -82,14 +82,14 @@ def _filter(response):
 
     color = res['imagePropertiesAnnotation']['dominantColors']['colors'][0]['color']
     print(color)
-    new_dict['color_score'] = _calculate_brightness(color)
+    new_dict['color_score'] = _calculate_color_score(color)
 
     labels.append(res['labelAnnotations'][0]['description'])
     labels.append(res['labelAnnotations'][1]['description'])
     new_dict['labels'] = labels
 
     print("color_score: " + str(new_dict['color_score']))
-    print("emotionScore: " + str(new_dict['emotion_score']))
+    print("emotion_score: " + str(new_dict['emotion_score']))
     print("labels: " + str(new_dict['labels']))
     return new_dict
 
@@ -119,7 +119,7 @@ def _calculate_score(emotions, confidence):
     return score * 100
 
 
-def _calculate_brightness(color):
+def _calculate_color_score(color):
     """
     Sums rgb and maps that to a value between 1-100.
 
