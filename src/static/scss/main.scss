@@ -9,6 +9,9 @@ body {
     line-height: normal;
 }
 
+:focus {outline:none !important;}
+::-moz-focus-inner {border:0 !important;}
+
 #content {
     height: 100%
 }
@@ -99,6 +102,7 @@ body {
         &.snapped{
             background: rgba(0, 78, 78, 0.17);
             opacity: 1;
+            cursor: default;
         }
     }
 
