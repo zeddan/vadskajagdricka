@@ -38,6 +38,9 @@
         
         $scope.snap = function() {
 
+            // we don't want users to hammer the snap button
+            if ($scope.snapped) return;
+
             // the bar is closed between 09:00 and 12:00
             var hour = new Date().getHours();
             if (hour >= 9 && hour <= 12) {
@@ -46,14 +49,14 @@
             
             // otherwise, proceed as usual
             else {
-                $scope.loading = true;
+                $scope.snapped = true;
 
                 var canvas = document.getElementById('canvas');
                 var context = canvas.getContext('2d');
                 var video = document.getElementById('video');
             
                 // take a snapshot of the video
-                context.drawImage(video, 0, 0, 640, 480);
+                context.drawImage(video, 0, 0, 500, 375);
             
                 // convert image to a b64 string
                 var img = canvas.toDataURL();
@@ -64,6 +67,13 @@
                 i.src = img;
                 parseService.setImage(i);
 
+                // replace streaming video with the image
+                context.drawImage(i, 0, 0);
+
+                setTimeout(function() {
+                    $scope.loading = true;
+                }, 500);
+
                 fetchImageResponse(b64, function(imageResponse) {
                     parseService.setImageResponse(imageResponse);
                     fetchBeverage(function(beverage) {
@@ -71,20 +81,31 @@
                         $location.path("/result");
                     });
                 });
-            
             }
 
         };
 
         var fetchImageResponse = function(b64, callback) {
-                var url = 'http://localhost:5000/api/picture';
-                $http.post(url, {"image": b64}).then(function(res) {
+                var req = {
+                    method: 'POST',
+                    url: 'http://localhost:5000/api/picture',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: {
+                        'image': b64
+                    }
+                }
+
+                $http(req).then(function(res) {
                     callback(res);
                 }, function(err) {
                     if (err.status == 422) {
                         var msg = "We couldn't identify any face in your " + 
                                   "picture, please try again."
                         $scope.errorMessage = msg; 
+                        $scope.snapped = false;
+                        $scope.loading = false;
                     }
                 });
         }
@@ -126,9 +147,8 @@
         var canvas = document.getElementById('result_canvas');
         var img = parseService.image;;
         var context = canvas.getContext("2d");
-        context.scale(0.45, 0.45);
+        context.scale(0.55, 0.55);
         context.drawImage(img, 0, 0);
-
     }]);
 
     app.controller('WaterController', [

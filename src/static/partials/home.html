@@ -5,11 +5,17 @@
 </div>
 
 <div id="video_section" ng-show="cameraAccess && !loading">
-    <video id="video" width="500" height="375" autoplay></video>
-    <button class="button" id="snap" ng-click="snap()">
+    <video id="video" width="500" height="375" ng-class="{'snapped': snapped}" autoplay></video>
+    <canvas id="canvas" width="500" height="375" ng-class="{'snapped': snapped}"></canvas>
+    <button class="button" ng-class="{'snapped': snapped}" id="snap" ng-click="snap()">
         <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
     </button>
-    <canvas id="canvas" width="500" height="500"></canvas>
+
+    <div ng-show="errorMessage"
+         ng-init="errorMessage = undefined"
+         id="err_msg">
+         {{ errorMessage }}
+    </div>
 
 </div>
 

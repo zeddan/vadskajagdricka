@@ -68,6 +68,12 @@
 body {
   line-height: normal; }
 
+:focus {
+  outline: none !important; }
+
+::-moz-focus-inner {
+  border: 0 !important; }
+
 #content {
   height: 100%; }
 
@@ -120,15 +126,24 @@ body {
 #video_section {
   text-align: center;
   padding-top: 5em; }
+  #video_section video.snapped {
+    display: none; }
+  #video_section canvas {
+    display: none;
+    background: red; }
+    #video_section canvas.snapped {
+      display: inline-block; }
   #video_section button {
     font-size: 1.5em; }
+    #video_section button.snapped {
+      background: rgba(0, 78, 78, 0.17);
+      opacity: 1;
+      cursor: default; }
   #video_section #err_msg {
     padding: 1em 0;
     text-align: center;
     letter-spacing: 0.04em;
     font-family: 'Montserrat', sans-serif; }
-  #video_section canvas {
-    display: none; }
 
 #snap {
   display: block;
