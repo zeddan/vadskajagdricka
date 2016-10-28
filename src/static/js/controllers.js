@@ -117,8 +117,8 @@
             
             var url = 'http://localhost:5000/api/beverages';
             var params = {
-                'price': parseService.imageResponse.emotionScore,
-                'alcohol': parseService.imageResponse.brightness,
+                'price_score': parseService.imageResponse.emotionScore,
+                'alcohol_score': parseService.imageResponse.brightness,
                 'ecological': parseService.imageResponse.ecological,
                 'hour': hour,
                 'month': month
