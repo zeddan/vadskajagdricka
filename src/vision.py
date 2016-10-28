@@ -1,6 +1,7 @@
 """vision.py handels communications with the Google Vision API"""
 import requests
 import json
+from numpy import interp
 from src import app
 
 url = 'https://vision.googleapis.com/v1/images:annotate?fields=responses&key='
@@ -33,7 +34,7 @@ def analyse(byte_string_image):
                 },
                 {
                  "type": "LABEL_DETECTION",
-                 "maxResults": 1
+                 "maxResults": 2
                 },
                 {
                  "type": "IMAGE_PROPERTIES",
@@ -88,12 +89,15 @@ def _filter(response):
     print("brightness: " + str(new_dict['brightness']))
 
     labels.append(res['labelAnnotations'][0]['description'])
+    labels.append(res['labelAnnotations'][1]['description'])
     new_dict['labels'] = labels
     if res['safeSearchAnnotation']['adult'] == "VERY_UNLIKELY":
         new_dict['ecological'] = "false"
     else:
         new_dict['ecological'] = "true"
+
     print(new_dict['emotionScore'])
+    print(new_dict['labels'])
     return new_dict
 
 
@@ -126,19 +130,19 @@ def _calculate_score(emotions, confidence):
 
 def _calculate_brightness(colors):
     """
-    Sums all values in the colors list and returns a value between 1-100.
+    Sums all values in the colors list and maps that to a value between 1-100.
 
     Keyword Arguments:
     colors -- a list of all the colors from the Vision API response.
 
-    Returns sum of all colors divided by 1000
+    Returns value between 1-100
     """
-
+    max_value = (255 * 3) * len(colors)
     brightness = 0
     for color in colors:
         r = int(color['red'])
         g = int(color['green'])
         b = int(color['blue'])
         brightness += r + b + g
-
-    return brightness/100
+    br = interp(brightness, [0, max_value], [1, 100])
+    return br
