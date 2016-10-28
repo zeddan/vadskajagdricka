@@ -1,6 +1,6 @@
 <div class="row" id="result">
     <div class="col-md-6" id="label_section">
-        <p id="label_txt">Nice {{ labels[0] | lowercase }} you got there!</p>
+        <p id="label_txt">Nice {{ labels[0] | lowercase }} {{ labels[1] | lowercase }} you got there!</p>
         <canvas class="img-circle" id="result_canvas" width="200" height="200"></canvas>
     </div>
 
@@ -23,6 +23,6 @@
                 <td>{{ beverage.volume | volume }}</td>
             </tr>
         </table>
-        
+
     </div>
 </div>
