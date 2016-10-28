@@ -43,7 +43,6 @@
 
             // the bar is closed between 09:00 and 12:00
             var hour = new Date().getHours();
-            hour = 16;
             if (hour >= 9 && hour <= 12) {
                 $location.path("/result/water");
             }
