@@ -21,42 +21,42 @@ def get_beverage(params):
     into a request systemetAPI can handle.
 
     Keyword Arguments:
-    params -- list containing price, alcohol, eco, hour, month
+    params -- list containing price score, alcohol score, eco, hour, month
 
     Returns a result from systemetAPI
     """
-    price   = float(params[0])
-    alcohol = float(params[1])
+    p_score = float(params[0])
+    a_score = float(params[1])
     eco     = str(params[2])
     hour    = int(params[3])
     month   = int(params[4])
 
     category = _get_category(hour, month)
 
-    payload = _map_values(category, price, alcohol, eco)
+    payload = _map_values(category, p_score, a_score, eco)
     res = requests.get(url, headers=headers, params=payload)
     return res, 200
 
 
-def _map_values(category, price, alcohol, ecological):
+def _map_values(category, p_score, a_score, ecological):
     """
     Maps the parameters to values in the category
 
     Keyword Arguments:
     category -- Category to map other parameters to.
-    price -- the value to map to category['price_from']
-    alcohol -- the value to map to category['alcohol_from']
+    p_score -- the value to map to category['price_from']
+    a_score -- the value to map to category['alcohol_from']
     ecological -- the value set ecological to.
 
     Returns a new dictionary.
     """
     new_dict = {}
     new_dict['tag'] = category['tag']
-    new_dict['alcohol_from'] = ('% 6.2f' % interp(alcohol, [1, 100],
+    new_dict['alcohol_from'] = ('% 6.2f' % interp(a_score, [1, 100],
                                                   [category['alcohol_from'],
                                                   category['alcohol_to']]))
     new_dict['alcohol_to'] = category['alcohol_to']
-    new_dict['price_from'] = ('% 6.2f' % interp(price, [1, 100],
+    new_dict['price_from'] = ('% 6.2f' % interp(p_score, [1, 100],
                                                 [category['price_from'],
                                                 category['price_to']]))
     new_dict['price_to'] = category['price_to']

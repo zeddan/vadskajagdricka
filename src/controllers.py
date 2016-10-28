@@ -29,20 +29,20 @@ def picture():
 @app.route('/api/beverages', methods=['GET'])
 def beverages():
     if request.method == 'GET':
-        price   = request.args.get('price')
-        alcohol = request.args.get('alcohol')
+        p_score = request.args.get('price_score')
+        a_score = request.args.get('alcohol_score')
         eco     = request.args.get('ecological')
         hour    = request.args.get('hour')
         month   = request.args.get('month')
 
-        if not (price and alcohol and eco):
+        if not (p_score and a_score and eco):
             return Response("Not enough parameters provided", status=400)
         if hour is None:
             hour = "23"
         if month is None:
             month = "12"
 
-        params = [price, alcohol, eco, hour, month]
+        params = [p_score, a_score, eco, hour, month]
         beveragedata, status = systembolaget.get_beverage(params)
         return Response(beveragedata, status=status, mimetype="application/json")
 
