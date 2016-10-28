@@ -70,7 +70,7 @@ def _filter(response):
     new_dict = {}
     res = response['responses'][0]
     emotions = {}
-    colors = []
+    color = {}
     labels = []
     face = res['faceAnnotations'][0]
     emotions['joy'] = face['joyLikelihood']
@@ -78,24 +78,23 @@ def _filter(response):
     emotions['headwear'] = face['headwearLikelihood']
     emotions['sorrow'] = face['sorrowLikelihood']
     emotions['anger'] = face['angerLikelihood']
-    new_dict['emotionScore'] = _calculate_score(emotions, face['detectionConfidence'])
+    new_dict['emotion_score'] = _calculate_score(emotions, face['detectionConfidence'])
 
-    for color in res['imagePropertiesAnnotation']['dominantColors']['colors']:
-        colors.append(color['color'])
-    new_dict['brightness'] = _calculate_brightness(colors)
-    print("brightness: " + str(new_dict['brightness']))
+    color = res['imagePropertiesAnnotation']['dominantColors']['colors'][0]['color']
+    print(color)
+    new_dict['color_score'] = _calculate_brightness(color)
 
     labels.append(res['labelAnnotations'][0]['description'])
     labels.append(res['labelAnnotations'][1]['description'])
     new_dict['labels'] = labels
 
-    print(new_dict['emotionScore'])
-    print(new_dict['labels'])
+    print("color_score: " + str(new_dict['color_score']))
+    print("emotionScore: " + str(new_dict['emotion_score']))
+    print("labels: " + str(new_dict['labels']))
     return new_dict
 
 
 def _calculate_score(emotions, confidence):
-    print(emotions)
     """
     Calulates an emotion score amd returns the highest score.
     Calculation is done by mapping the emotion value to a number between 0.04-1.0
@@ -117,25 +116,23 @@ def _calculate_score(emotions, confidence):
             emotion = k
 
     score = confidence * emotion_matrix[emotion][emotions[emotion]]
-    print(score)
     return score * 100
 
 
-def _calculate_brightness(colors):
+def _calculate_brightness(color):
     """
-    Sums all values in the colors list and maps that to a value between 1-100.
+    Sums rgb and maps that to a value between 1-100.
 
     Keyword Arguments:
-    colors -- a list of all the colors from the Vision API response.
+    color -- dict with the dominant color from the Vision API response.
 
     Returns value between 1-100
     """
-    max_value = (255 * 3) * len(colors)
-    brightness = 0
-    for color in colors:
-        r = int(color['red'])
-        g = int(color['green'])
-        b = int(color['blue'])
-        brightness += r + b + g
-    br = interp(brightness, [0, max_value], [1, 100])
-    return br
+    max_value = (255 * 3)
+    color_sum = 0
+    r = int(color['red'])
+    g = int(color['green'])
+    b = int(color['blue'])
+    color_sum = r + b + g
+    color_score = interp(color_sum, [0, max_value], [1, 100])
+    return color_score
