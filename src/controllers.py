@@ -41,10 +41,9 @@ def beverages():
         if month is None:
             month = "12"
 
-
         params = [p_score, a_score, hour, month]
-        beveragedata, status = systembolaget.get_beverage(params)
-        return Response(beveragedata, status=status, mimetype="application/json")
+        beveragedata = systembolaget.get_beverage(params)
+        return Response(beveragedata, status=200, mimetype="application/json")
 
 
 @app.errorhandler(404)

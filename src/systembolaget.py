@@ -7,65 +7,57 @@ from datetime import datetime
 from src import app
 
 
-categories       = json.loads(app.config.get('CATEGORIES'))
-categories_times = json.loads(app.config.get('CATEGORIES_TIMES'))
+CATEGORIES       = json.loads(app.config.get('CATEGORIES'))
+CATEGORIES_TIMES = json.loads(app.config.get('CATEGORIES_TIMES'))
 
-url     = "https://karlroos-systemet.p.mashape.com/product"
-key     = app.config.get('SYSTEMET_KEY')
-headers = {"X-Mashape-Key": key, "Accept": "application/json"}
+URL     = "https://karlroos-systemet.p.mashape.com/product"
+KEY     = app.config.get('SYSTEMET_KEY')
+HEADERS = {"X-Mashape-Key": KEY, "Accept": "application/json"}
 
 
 def get_beverage(params):
     """
-    Requests a beverag by aplying the params to a base category and turning it
+    Requests a beverage by applying the params to a base category and turning it
     into a request systemetAPI can handle.
 
     Keyword Arguments:
-    params -- list containing price score, alcohol score, eco, hour, month
+    params -- list containing price score, alcohol score, hour, month.
 
-    Returns a result from systemetAPI
+    Returns a Response object.
     """
-
     p_score = float(params[0])
     a_score = float(params[1])
     hour    = int(params[2])
     month   = int(params[3])
 
     category = _get_category(hour, month)
-
     payload = _map_values(category, p_score, a_score)
-
-    res = requests.get(url, headers=headers, params=payload)
-    return res, 200
-
+    res = requests.get(URL, headers=HEADERS, params=payload)
+    return res
 
 
 def _map_values(category, p_score, a_score):
     """
-    Maps the parameters to values in the category
+    Maps the parameters to values in the category.
 
     Keyword Arguments:
-    category -- Category to map other parameters to.
-    p_score -- the value to map to category['price_from']
-    a_score -- the value to map to category['alcohol_from']
+    category -- the category to map other parameters to.
+    p_score -- the value to map to category['price_from'].
+    a_score -- the value to map to category['alcohol_from'].
 
-    Returns a new dictionary.
+    Returns a dictionary containing the new values.
     """
     new_dict = {}
-    new_dict['tag'] = category['tag']
-    new_dict['alcohol_from'] = ('% 6.2f' % interp(a_score, [1, 100],
-                                                  [category['alcohol_from'],
-                                                  category['alcohol_to']]))
-    new_dict['alcohol_to'] = category['alcohol_to']
-    new_dict['price_from'] = ('% 6.2f' % interp(p_score, [1, 100],
-                                                [category['price_from'],
-                                                category['price_to']]))
+    a_mapped = interp(a_score, [1, 100], [category['alcohol_from'], category['alcohol_to']])
+    p_mapped = interp(p_score, [1, 100], [category['price_from'], category['price_to']])
+    new_dict['price_from'] = '%0.2f' % p_mapped
     new_dict['price_to'] = category['price_to']
+    new_dict['alcohol_from'] = '%0.2f' % a_mapped
+    new_dict['alcohol_to'] = category['alcohol_to']
+    new_dict['tag'] = category['tag']
     new_dict['order'] = 'ASC'
     new_dict['order_by'] = 'price'
     new_dict["limit"] = 1
-
-    print(new_dict)
     return new_dict
 
 
@@ -76,14 +68,14 @@ def _get_category(hour, month):
 
     Keyword Arguments:
     hour -- integer representing hour of day.
-    month -- intger representing month of the year.
+    month -- integer representing month of the year.
 
-    Returns a category
+    Returns a category.
     """
-    possible_categories = categories_times[str(hour)]
+    possible_categories = CATEGORIES_TIMES[str(hour)]
     if month == 12:
-        xmas_category = categories_times["xmas"]
+        xmas_category = CATEGORIES_TIMES["xmas"]
         possible_categories.append(xmas_category)
     random_choice = str(random.choice(possible_categories))
-    category = categories[random_choice]
+    category = CATEGORIES[random_choice]
     return category
