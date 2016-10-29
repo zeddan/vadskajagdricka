@@ -165,15 +165,27 @@ body {
     letter-spacing: 0.04em;
     font-family: 'Montserrat', sans-serif;
 
+    a:hover {
+        text-decoration: none;
+    }
+
     p {
         font-size: 2em;
         color: #b019f1;
         margin: 0;
+
+        &:hover {
+            transition: all 0.2s ease;
+            border-bottom: 0.2em solid;
+            text-decoration: none;
+        }
+
     }
 
     span {
         display: block;
         font-size: 2em;
+        margin: 1em;
         color: #363636;
     }
 
