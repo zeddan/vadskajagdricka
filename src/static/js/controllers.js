@@ -43,6 +43,7 @@
 
             // the bar is closed between 09:00 and 12:00
             var hour = new Date().getHours();
+            hour = 22;
             if (hour >= 9 && hour <= 12) {
                 $location.path("/result/water");
             }
@@ -89,12 +90,8 @@
                 var req = {
                     method: 'POST',
                     url: 'http://localhost:5000/api/picture',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    data: {
-                        'image': b64
-                    }
+                    headers: {'Content-Type': 'application/json'},
+                    data: {'image': b64}
                 }
 
                 $http(req).then(function(res) {
@@ -138,9 +135,11 @@
     'parseService',
     function($scope, $http, parseService) {
 
-        $scope.beverage = parseService.getBeverage();
+        // no need to proceed without data
+        if (!parseService.imageResponse) return;
 
-        // "nice XX you got there"
+        // get the labels and the beverage
+        $scope.beverage = parseService.beverage;
         $scope.labels = parseService.imageResponse.labels;
 
         // render image
@@ -149,6 +148,7 @@
         var context = canvas.getContext("2d");
         context.scale(0.55, 0.55);
         context.drawImage(img, 0, 0);
+
     }]);
 
     app.controller('WaterController', [

@@ -32,6 +32,7 @@ body {
 }
 
 .centerXY {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -146,6 +147,25 @@ body {
 #result {
     margin: 0;
     height: 100%;
+}
+
+#result_info {
+    text-align: center;
+    letter-spacing: 0.04em;
+    font-family: 'Montserrat', sans-serif;
+
+    p {
+        font-size: 2em;
+        color: #b019f1;
+        margin: 0;
+    }
+
+    span {
+        display: block;
+        font-size: 2em;
+        color: #363636;
+    }
+
 }
 
 #label_section {

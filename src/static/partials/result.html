@@ -1,4 +1,12 @@
-<div class="row" id="result">
+<div id="result_info" class="centerXY" ng-show="!(beverage && labels)">
+    <p>Take a picture of yourself first, won't you?</p>
+    <div class="centerXY">
+        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+    </div>
+</div>
+
+<div class="row" id="result" ng-show="beverage && labels">
+
     <div class="col-md-6" id="label_section">
         <div id="label_container">
             <p id="label_txt">Nice {{ labels[0] | lowercase }} {{ labels[1] | lowercase }} you got there!</p>
@@ -6,7 +14,7 @@
         </div>
     </div>
 
-    <div ng-show="beverage" class="col-md-6" id="beverage_section">
+    <div class="col-md-6" id="beverage_section">
 
         <div id="beverage_container">
             <h1>We would therefore like to recommend to you:</h1>
