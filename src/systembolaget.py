@@ -1,9 +1,8 @@
-"""systembolaget.py handels the communication with systemetAPI"""
+""" systembolaget.py handels the communication with systemetAPI """
 import json
-import requests
 import random
+import requests
 from numpy import interp
-from datetime import datetime
 from src import app
 
 

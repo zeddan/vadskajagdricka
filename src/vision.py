@@ -1,6 +1,6 @@
-"""vision.py handels communications with the Google Vision API"""
-import requests
+""" vision.py handels communications with the Google Vision API """
 import json
+import requests
 from numpy import interp
 from src import app
 
