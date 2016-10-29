@@ -1,6 +1,5 @@
 import os
 import json
-import base64
 from flask import render_template, send_from_directory, make_response, request, Response
 from src import app, vision, systembolaget
 
