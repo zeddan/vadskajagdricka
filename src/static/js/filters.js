@@ -12,7 +12,13 @@
 
     app.filter('alcohol', function() {
         return function(alcohol) {
-            return Math.round(alcohol * 100) + " %";
+            var decimals = alcohol.toString().split(".")[1].length;
+            if (decimals <= 2)
+                return Math.round(alcohol * 100) + " %";
+            else if (decimals == 3)
+                return (alcohol * 100).toFixed(1) + " %";
+            else if (decimals == 4)
+                return (alcohol * 100).toFixed(2) + " %";
         };
     });
 
