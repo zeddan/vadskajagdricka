@@ -160,11 +160,4 @@
         $scope.img = "http://image.flaticon.com/icons/png/512/190/190539.png";
     }]);
 
-    app.controller('AboutController', [
-    '$scope',
-    function($scope) {
-
-    }]);
-
-
 })();

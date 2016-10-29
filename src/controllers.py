@@ -9,7 +9,6 @@ from src import app, vision, systembolaget
 @app.route('/')
 @app.route('/result')
 @app.route('/result/water')
-@app.route('/about')
 @app.route('/api')
 def basic_pages():
     return make_response(open('src/templates/index.html').read())

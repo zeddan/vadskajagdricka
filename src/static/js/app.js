@@ -23,10 +23,6 @@
                 templateUrl: 'static/partials/water.html',
                 controller: 'WaterController'
             })
-            .when('/about', {
-                templateUrl: 'static/partials/about.html',
-                controller: 'AboutController'
-            })
             .when('/api', {
                 templateUrl: 'static/partials/api.html'
             })
