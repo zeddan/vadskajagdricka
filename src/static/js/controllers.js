@@ -99,11 +99,7 @@
                     callback(res);
                 }, function(err) {
                     if (err.status == 422) {
-                        var msg = "We couldn't identify any face in your " +
-                                  "picture, please try again."
-                        $scope.errorMessage = msg;
-                        $scope.snapped = false;
-                        $scope.loading = false;
+                        setError("We couldn't identify any face in your picture, please try again.");
                     }
                 });
         }
@@ -122,10 +118,20 @@
             }
 
             $http.get(url, {'params': params}).then(function(res) {
-                callback(res.data);
+                if (res.data == undefined) {
+                    setError("Something unexpected just happened, please try again.");
+                } else {
+                    callback(res.data);
+                }
             });
-
         }
+
+        var setError = function(msg) {
+            $scope.errorMessage = msg;
+            $scope.snapped = false;
+            $scope.loading = false;
+        }
+
 
     }]);
 
