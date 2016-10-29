@@ -25,7 +25,7 @@ def analyse(img_b64):
     Keyword Arguments:
     img_b64 -- base64 encoded string
 
-    Returns a filterd response from the Vision API as a JSON object.
+    Returns a processed response from the Vision API as a JSON object.
     """
     image_request = {
       "requests": [
@@ -56,17 +56,17 @@ def analyse(img_b64):
     if not {'faceAnnotations', 'labelAnnotations'} <= set(r):
         return {}, 422
     else:
-        result = _filter(response)
+        result = _convert(response)
         return json.dumps(result), 200
 
 
-def _filter(response):
+def _convert(response):
     """
-    Filters the response from the Vision API and returns a new dictionary with
+    Converts the response from the Vision API and returns a new dictionary with
     emotion_score, color_score and labels values.
 
     Keyword Arguments:
-    response -- dictionary containing the response to filter.
+    response -- dictionary containing the response to convert.
     """
     new_dict = {}
     emotions = {}

@@ -122,7 +122,7 @@
             }
 
             $http.get(url, {'params': params}).then(function(res) {
-                callback(res.data[0]);
+                callback(res.data);
             });
 
         }

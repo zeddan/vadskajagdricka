@@ -25,15 +25,34 @@ def get_beverage(params):
 
     Returns a Response object.
     """
-    p_score = float(params[0])
-    a_score = float(params[1])
-    hour    = int(params[2])
-    month   = int(params[3])
+    p_score = params[0]
+    a_score = params[1]
+    hour    = params[2]
+    month   = params[3]
 
     category = _get_category(hour, month)
     payload = _map_values(category, p_score, a_score)
-    res = requests.get(URL, headers=HEADERS, params=payload)
-    return res
+    response = requests.get(URL, headers=HEADERS, params=payload).json()
+    result = _filter(response[0])
+    return json.dumps(result)
+
+
+def _filter(response):
+    """
+    Filters the reponse from systemetAPI and returns a new dictionary
+
+    Keyword Arguments:
+    response -- dictionary containing the reponse to filter.
+    """
+    new_dict = {}
+    new_dict['name'] = response['name']
+    new_dict['name_2'] = response['name_2']
+    new_dict['price'] = response['price']
+    new_dict['alcohol'] = response['alcohol']
+    new_dict['apk'] = response['apk']
+    new_dict['volume'] = response['volume']
+    new_dict['tags'] = response['tags']
+    return new_dict
 
 
 def _map_values(category, p_score, a_score):
