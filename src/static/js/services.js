@@ -10,26 +10,12 @@
             this.imageResponse = res.data;
         };
 
-        this.getImageResponse = function() {
-            return this.imageResponse;
-        };
-
         this.setImage = function(image) {
             this.image = image;
         };
 
-        this.getImage = function() {
-            return this.image;
-        };
-
         this.setBeverage = function(beverage) {
             this.beverage = beverage;
-            console.log(beverage);
-        }
-
-        this.getBeverage = function() {
-            return this.beverage;
-            console.log(beverage);
         }
 
     }]);
