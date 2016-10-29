@@ -7,6 +7,10 @@
 
 <div class="row" id="result" ng-show="beverage && labels">
 
+    <a href="/">
+        <span id="back" class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+    </a>
+
     <div class="col-md-6" id="label_section">
         <div id="label_container">
             <p id="label_txt">Nice {{ labels[0] | lowercase }} {{ labels[1] | lowercase }} you got there!</p>

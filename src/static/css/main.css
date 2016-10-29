@@ -169,6 +169,14 @@ body {
 #result {
   margin: 0;
   height: 100%; }
+  #result #back {
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 1;
+    font-size: 1.5em;
+    margin: 1em;
+    color: rgba(54, 54, 54, 0.9); }
 
 #result_info {
   text-align: center;
