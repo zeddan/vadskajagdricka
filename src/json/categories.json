@@ -41,8 +41,8 @@
     "tag": "3",
     "alcohol_from": "0.40",
     "alcohol_to": "0.45",
-    "price_from": "249",
-    "price_to": "5000"
+    "price_from": "100",
+    "price_to": "2000"
   },
   "6": {
     "id": "6",
@@ -69,6 +69,6 @@
     "alcohol_from": "0.09",
     "alcohol_to": "0.21",
     "price_from": "34",
-    "price_to": "100"
+    "price_to": "150"
   }
 }
