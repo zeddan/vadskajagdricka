@@ -1,7 +1,7 @@
 /*
-    Based on Curtis Andrews's codepen:
-    https://codepen.io/candrews/pen/XdGYpN
-*/
+ * Based on Curtis Andrews's codepen:
+ * https://codepen.io/candrews/pen/XdGYpN
+ */
 
 $dotSize: 12px;
 $dotColor: #363636;
@@ -11,58 +11,58 @@ $animationRadius: 15px;
 $animationHeight: $dotSize * 2 + $dotSpace * 2 + $animationRadius * 2;
 
 .loader {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: $dotSize;
-    height: $animationHeight;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: $dotSize;
+  height: $animationHeight;
 }
 
 .dot {
-    position: absolute;
-    top: $animationHeight / 2 - $dotSize / 2 ;
-    display: inline-block;
-    width: $dotSize;
-    height: $dotSize;
-    border-radius: $dotSize / 2;
-    background: $dotColor;
+  position: absolute;
+  top: $animationHeight / 2 - $dotSize / 2 ;
+  display: inline-block;
+  width: $dotSize;
+  height: $dotSize;
+  border-radius: $dotSize / 2;
+  background: $dotColor;
 }
 
 .dot_1 { 
-    transform: translateX( -$dotSpace );
-    animation: animateDot1 $animationLength infinite;
+  transform: translateX( -$dotSpace );
+  animation: animateDot1 $animationLength infinite;
 }
 
 .dot_2 { 
-    transform: translateX( 0px );
-    animation: animateDot2 $animationLength infinite;
+  transform: translateX( 0px );
+  animation: animateDot2 $animationLength infinite;
 }
 
 .dot_3 { 
-    transform: translateX( $dotSpace ); 
-    animation: animateDot3 $animationLength infinite;
+  transform: translateX( $dotSpace ); 
+  animation: animateDot3 $animationLength infinite;
 }
 
 @keyframes animateDot1 {
-    0%    { transform: translateX( -$dotSpace ); }
-    12.5% { transform: translateX( -$animationRadius - $dotSpace ); }
-    37.5% { transform: translateX( -$dotSize ); }
-    62.5% { transform: translateX( -$dotSpace ); }
-    100%  { transform: translateX( -$dotSpace ); }
+  0%    { transform: translateX( -$dotSpace ); }
+  12.5% { transform: translateX( -$animationRadius - $dotSpace ); }
+  37.5% { transform: translateX( -$dotSize ); }
+  62.5% { transform: translateX( -$dotSpace ); }
+  100%  { transform: translateX( -$dotSpace ); }
 }
 
 @keyframes animateDot2 {
-    0%    { transform: translateX( -$dotSize ); }
-    37%   { transform: translateX( 0px );}
-    50%   { transform: translateX( $dotSize ); }
-    88%   { transform: translateX( 0px ); }
-    100%  { transform: translateX( -$dotSize ); } 
+  0%    { transform: translateX( -$dotSize ); }
+  37%   { transform: translateX( 0px );}
+  50%   { transform: translateX( $dotSize ); }
+  88%   { transform: translateX( 0px ); }
+  100%  { transform: translateX( -$dotSize ); } 
 }
 
 @keyframes animateDot3 {
-    12.5% { transform: translateX( -$animationRadius $dotSpace ); }
-    50%   { transform: translateX( $dotSpace ); }
-    62.5% { transform: translateX( $animationRadius + $dotSpace ); }
-    87.5% { transform: translateX( $dotSize ); }
+  12.5% { transform: translateX( -$animationRadius $dotSpace ); }
+  50%   { transform: translateX( $dotSpace ); }
+  62.5% { transform: translateX( $animationRadius + $dotSpace ); }
+  87.5% { transform: translateX( $dotSize ); }
 }
